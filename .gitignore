@@ -1,0 +1,5 @@
+data/*
+pubsubpb/pubsub.pb.go
+go.mod
+go.sum
+.env

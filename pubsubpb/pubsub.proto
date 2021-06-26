@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package pubsub;
+option go_package = "./pubsubpb";
+
+message Event {
+    string channel = 1;
+    string msg = 2;
+}
+
+message PublishedEvent {
+    string channel = 1;
+    string msg = 2;
+    int64 subscriber_count =3;
+}
+
+message PublishEventRequest {
+    Event event = 1;
+}
+
+message PublishEventResponse {
+    PublishedEvent publish_event = 1;
+}
+
+message ListenEventRequest {
+    string channel = 1;
+}
+
+message ListenEventResponse {
+    Event event = 1;
+}
+
+service PubsubService {
+    rpc PublishEvent(PublishEventRequest) returns (PublishEventResponse);
+
+    rpc ListenEvent(ListenEventRequest) returns (stream ListenEventResponse);
+}
